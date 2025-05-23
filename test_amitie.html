@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test d'Amitié</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #resultat {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test d'Amitié</h1>
+    <form id="quiz">
+      <div class="question">
+        <label>1. Quelle est la couleur préférée de ton ami(e) ?</label><br>
+        <input type="text" name="q1">
+      </div>
+      <div class="question">
+        <label>2. Quel est son plat préféré ?</label><br>
+        <input type="text" name="q2">
+      </div>
+      <div class="question">
+        <label>3. Quel est le nom de son animal de compagnie (s'il en a un) ?</label><br>
+        <input type="text" name="q3">
+      </div>
+      <div class="question">
+        <label>4. Quelle est sa date d'anniversaire ?</label><br>
+        <input type="date" name="q4">
+      </div>
+      <div class="question">
+        <label>5. Quel est son rêve ?</label><br>
+        <input type="text" name="q5">
+      </div>
+      <button type="button" onclick="calculerScore()">Voir le résultat</button>
+    </form>
+    <div id="resultat"></div>
+  </div>
+
+  <script>
+    function calculerScore() {
+      const form = document.getElementById('quiz');
+      const valeurs = Array.from(form.elements)
+        .filter(e => e.tagName === 'INPUT')
+        .map(e => e.value.trim());
+      const score = valeurs.filter(v => v !== '').length;
+
+      const resultat = document.getElementById('resultat');
+      if (score === 5) {
+        resultat.textContent = "Vous connaissez parfaitement votre ami(e) !";
+      } else if (score >= 3) {
+        resultat.textContent = "Vous connaissez bien votre ami(e), mais vous pouvez encore en apprendre plus !";
+      } else {
+        resultat.textContent = "On dirait que vous avez encore beaucoup à découvrir l'un sur l'autre.";
+      }
+    }
+  </script>
+</body>
+</html>
